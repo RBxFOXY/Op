@@ -1,21 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu APKs</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RBx APKs</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0b0f;
+      color: white;
+    }
+
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      background: #15151c;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 35px;
+    }
+
+    header p {
+      color: #aaa;
+    }
+
+    .container {
+      padding: 25px 15px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .app {
+      background: #181820;
+      padding: 22px;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      border: 1px solid #292936;
+    }
+
+    .app h2 {
+      margin-top: 0;
+    }
+
+    .version {
+      color: #aaa;
+    }
+
+    .download {
+      display: block;
+      text-align: center;
+      background: #2f80ed;
+      color: white;
+      padding: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 18px;
+    }
+
+    .download:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+  </style>
 </head>
 
 <body>
-    <h1>📱 Meu APKs</h1>
 
-    <p>Baixe meus aplicativos aqui.</p>
+  <header>
+    <h1>📱 RBx APKs</h1>
+    <p>Aplicativos e downloads</p>
+  </header>
 
-    <h2>Meu aplicativo</h2>
-    <p>Versão 1.0</p>
+  <div class="container">
 
-    <a href="app.apk" download>
+    <div class="app">
+      <h2>Meu aplicativo</h2>
+      <p class="version">Versão 1.0</p>
+      <p>Descrição do meu aplicativo.</p>
+
+      <a class="download" href="app.apk" download>
         ⬇️ BAIXAR APK
-    </a>
+      </a>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 RBx APKs
+  </footer>
+
 </body>
 </html>
