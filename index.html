@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RBx APKs</title>
+
+  <title>Terraria Mobile | RBx APKs</title>
 
   <style>
     * {
@@ -13,91 +14,153 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0b0b0f;
+      background: #101820;
       color: white;
     }
 
-    header {
-      padding: 40px 20px;
+    .hero {
       text-align: center;
-      background: #15151c;
+      padding: 55px 20px;
+      background: linear-gradient(#173b27, #101820);
     }
 
-    h1 {
-      margin: 0;
-      font-size: 35px;
+    .hero h1 {
+      font-size: 42px;
+      margin: 0 0 10px;
     }
 
-    header p {
-      color: #aaa;
+    .hero p {
+      color: #c8d2d0;
+      font-size: 18px;
     }
 
     .container {
-      padding: 25px 15px;
-      max-width: 600px;
+      max-width: 650px;
       margin: auto;
+      padding: 25px 15px;
     }
 
-    .app {
-      background: #181820;
-      padding: 22px;
+    .card {
+      background: #18232b;
+      border: 1px solid #2d3c44;
+      border-radius: 18px;
+      padding: 25px;
       margin-bottom: 20px;
-      border-radius: 16px;
-      border: 1px solid #292936;
     }
 
-    .app h2 {
+    .card h2 {
       margin-top: 0;
     }
 
-    .version {
-      color: #aaa;
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .info div {
+      background: #101820;
+      padding: 14px;
+      border-radius: 10px;
     }
 
     .download {
       display: block;
       text-align: center;
-      background: #2f80ed;
+      background: #35a853;
       color: white;
-      padding: 14px;
-      border-radius: 10px;
       text-decoration: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 18px;
       font-weight: bold;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
-    .download:active {
-      transform: scale(0.98);
+    .download:hover {
+      opacity: 0.9;
+    }
+
+    .warning {
+      color: #ffd166;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     footer {
       text-align: center;
       padding: 30px;
-      color: #777;
+      color: #77838a;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>📱 RBx APKs</h1>
-    <p>Aplicativos e downloads</p>
-  </header>
+  <section class="hero">
+    <h1>🌲 Terraria</h1>
+    <p>Aventura, exploração e construção no mundo 2D.</p>
+  </section>
 
-  <div class="container">
+  <main class="container">
 
-    <div class="app">
-      <h2>Meu aplicativo</h2>
-      <p class="version">Versão 1.0</p>
-      <p>Descrição do meu aplicativo.</p>
+    <div class="card">
+      <h2>🎮 Terraria Mobile</h2>
 
-      <a class="download" href="https://github.com/RBxFOXY/Op/releases/download/V1/terraria_v.1.4.5.8.5_x86.apk" download>
+      <p>
+        Explore um mundo cheio de cavernas, inimigos,
+        tesouros e possibilidades de construção.
+      </p>
+
+      <div class="info">
+        <div>
+          <strong>📱 Plataforma</strong><br>
+          Android
+        </div>
+
+        <div>
+          <strong>📦 Versão</strong><br>
+          1.4.5.8
+        </div>
+
+        <div>
+          <strong>📁 Arquivo</strong><br>
+          APK
+        </div>
+
+        <div>
+          <strong>💾 Tamanho</strong><br>
+          ~200 MB
+        </div>
+      </div>
+
+      <a
+        class="download"
+        href="https://github.com/RBxFOXY/Op/releases/download/V1/terraria_v.1.4.5.8.5_x86.apk">
         ⬇️ BAIXAR APK
       </a>
     </div>
 
-  </div>
+    <div class="card">
+      <h2>🌎 Sobre o jogo</h2>
+
+      <p>
+        Terraria é um jogo de aventura e exploração em
+        um mundo 2D onde você pode explorar, construir,
+        coletar recursos e enfrentar criaturas e chefes.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>⚠️ Informações</h2>
+
+      <p class="warning">
+        Distribua somente arquivos que você tenha
+        autorização para disponibilizar.
+      </p>
+    </div>
+
+  </main>
 
   <footer>
     © 2026 RBx APKs
