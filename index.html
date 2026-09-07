@@ -90,7 +90,6 @@
 
     button:disabled {
       opacity: 0.6;
-      cursor: not-allowed;
     }
 
     .download {
@@ -118,6 +117,12 @@
       line-height: 1.5;
     }
 
+    .privacy {
+      color: #9da9ae;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
     footer {
       text-align: center;
       padding: 30px;
@@ -127,13 +132,6 @@
     .creator {
       margin-top: 8px;
       font-size: 16px;
-    }
-
-    .privacy {
-      color: #9da9ae;
-      font-size: 12px;
-      margin-top: 12px;
-      line-height: 1.4;
     }
   </style>
 </head>
@@ -156,6 +154,7 @@
       </p>
 
       <div class="info">
+
         <div>
           <strong>📱 Plataforma</strong><br>
           Android
@@ -175,10 +174,13 @@
           <strong>💾 Tamanho</strong><br>
           ~200 MB
         </div>
+
       </div>
     </div>
 
+
     <div class="card">
+
       <h2>📧 Liberar download</h2>
 
       <p>
@@ -194,28 +196,33 @@
         required
       >
 
-      <button id="continuarBtn" onclick="enviarEmail()">
+      <button
+        id="continuarBtn"
+        onclick="enviarEmail()"
+      >
         CONTINUAR
       </button>
 
       <p id="mensagem"></p>
 
       <p class="privacy">
-        Seu e-mail será usado somente para registrar o acesso ao download.
+        Ao continuar, você concorda com o envio do endereço informado
+        para registro do acesso ao download.
       </p>
 
-      <!-- Download liberado após o envio -->
       <a
         id="download"
         class="download"
         href="https://github.com/RBxFOXY/Op/releases/download/V1/terraria_v.1.4.5.8.5_x86.apk"
-        download
       >
         ⬇️ BAIXAR TERRARIA
       </a>
+
     </div>
 
+
     <div class="card">
+
       <h2>📖 Sobre Terraria 1.4.5.8</h2>
 
       <p>
@@ -228,12 +235,16 @@
       <p>⚔️ Enfrente inimigos e chefes.</p>
       <p>💎 Colete recursos e descubra novos itens.</p>
       <p>🌎 Explore um mundo cheio de possibilidades.</p>
+
     </div>
 
+
     <div class="card">
+
       <h2>📋 Informações</h2>
 
       <div class="info">
+
         <div>
           <strong>🎮 Jogo</strong><br>
           Terraria
@@ -253,114 +264,165 @@
           <strong>📦 Arquivo</strong><br>
           APK
         </div>
+
       </div>
+
     </div>
 
+
     <div class="card">
+
       <h2>⚠️ Aviso</h2>
 
       <p class="warning">
         Disponibilize somente arquivos que você tenha
         autorização para distribuir.
       </p>
+
     </div>
 
   </main>
 
+
   <footer>
+
     © 2026 RBx APKs
 
     <div class="creator">
       Criado por <strong>FOXY</strong> 🦊
     </div>
+
   </footer>
 
-  <script>
-    /*
-      COLOQUE A URL DO SEU CLOUDFLARE WORKER AQUI
-      quando terminarmos a configuração do Discord.
 
-      Exemplo:
-      const WORKER_URL = "https://seu-worker.seudominio.workers.dev";
-    */
-    const WORKER_URL = "";
+  <script>
+
+    // URL DO SEU CLOUDFLARE WORKER
+    const WORKER_URL =
+      "https://odd-poetry-54b0.m70cos.workers.dev";
+
 
     async function enviarEmail() {
-      const emailInput = document.getElementById("email");
-      const mensagem = document.getElementById("mensagem");
-      const botao = document.getElementById("continuarBtn");
-      const download = document.getElementById("download");
 
-      const email = emailInput.value.trim();
+      const emailInput =
+        document.getElementById("email");
 
-      if (!email || !emailInput.checkValidity()) {
-        mensagem.textContent = "❌ Digite um e-mail válido.";
-        mensagem.style.color = "#ff5555";
+      const mensagem =
+        document.getElementById("mensagem");
+
+      const botao =
+        document.getElementById("continuarBtn");
+
+      const download =
+        document.getElementById("download");
+
+
+      const email =
+        emailInput.value.trim();
+
+
+      // Verifica o e-mail
+      if (
+        !email ||
+        !emailInput.checkValidity()
+      ) {
+
+        mensagem.textContent =
+          "❌ Digite um e-mail válido.";
+
+        mensagem.style.color =
+          "#ff5555";
+
         return;
       }
 
+
+      // Desativa o botão
       botao.disabled = true;
-      botao.textContent = "PROCESSANDO...";
-      mensagem.textContent = "Enviando...";
-      mensagem.style.color = "#ffd166";
 
-      /*
-        Enquanto o Worker não estiver configurado,
-        o download é liberado localmente.
+      botao.textContent =
+        "PROCESSANDO...";
 
-        Depois que colocarmos a URL do Worker,
-        o download só será liberado se o envio ao
-        Discord for confirmado.
-      */
-      if (!WORKER_URL) {
-        setTimeout(() => {
-          mensagem.textContent = "✅ Download liberado!";
-          mensagem.style.color = "#35c759";
+      mensagem.textContent =
+        "Enviando...";
 
-          download.style.display = "block";
+      mensagem.style.color =
+        "#ffd166";
 
-          botao.style.display = "none";
-        }, 800);
-
-        return;
-      }
 
       try {
-        const resposta = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            email: email
-          })
-        });
 
-        const resultado = await resposta.json();
+        const resposta =
+          await fetch(
+            WORKER_URL,
+            {
+              method: "POST",
 
-        if (!resposta.ok || !resultado.ok) {
-          throw new Error("Falha ao enviar");
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                email: email
+              })
+            }
+          );
+
+
+        const resultado =
+          await resposta.json();
+
+
+        // Se o Worker não confirmou
+        if (
+          !resposta.ok ||
+          !resultado.ok
+        ) {
+
+          throw new Error(
+            "Falha no envio"
+          );
         }
 
-        mensagem.textContent = "✅ Download liberado!";
-        mensagem.style.color = "#35c759";
 
-        download.style.display = "block";
-        botao.style.display = "none";
+        // Sucesso
+        mensagem.textContent =
+          "✅ Download liberado!";
+
+        mensagem.style.color =
+          "#35c759";
+
+
+        download.style.display =
+          "block";
+
+
+        botao.style.display =
+          "none";
+
 
       } catch (erro) {
+
         console.error(erro);
 
         mensagem.textContent =
           "❌ Não foi possível liberar o download. Tente novamente.";
 
-        mensagem.style.color = "#ff5555";
+        mensagem.style.color =
+          "#ff5555";
 
-        botao.disabled = false;
-        botao.textContent = "CONTINUAR";
+
+        botao.disabled =
+          false;
+
+        botao.textContent =
+          "CONTINUAR";
       }
+
     }
+
   </script>
 
 </body>
-</html>
+  </html>
