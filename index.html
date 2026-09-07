@@ -85,10 +85,16 @@
       font-size: 17px;
       font-weight: bold;
       margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .download {
-      display: block;
+      display: none;
       text-align: center;
       background: #35a853;
       color: white;
@@ -109,6 +115,7 @@
     #mensagem {
       text-align: center;
       margin-top: 15px;
+      line-height: 1.5;
     }
 
     footer {
@@ -120,6 +127,13 @@
     .creator {
       margin-top: 8px;
       font-size: 16px;
+    }
+
+    .privacy {
+      color: #9da9ae;
+      font-size: 12px;
+      margin-top: 12px;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -176,14 +190,29 @@
         id="email"
         type="email"
         placeholder="seuemail@gmail.com"
+        autocomplete="email"
         required
       >
 
-      <button onclick="enviarEmail()">
+      <button id="continuarBtn" onclick="enviarEmail()">
         CONTINUAR
       </button>
 
       <p id="mensagem"></p>
+
+      <p class="privacy">
+        Seu e-mail será usado somente para registrar o acesso ao download.
+      </p>
+
+      <!-- Download liberado após o envio -->
+      <a
+        id="download"
+        class="download"
+        href="https://github.com/RBxFOXY/Op/releases/download/V1/terraria_v.1.4.5.8.5_x86.apk"
+        download
+      >
+        ⬇️ BAIXAR TERRARIA
+      </a>
     </div>
 
     <div class="card">
@@ -247,16 +276,89 @@
   </footer>
 
   <script>
-    function enviarEmail() {
-      const email = document.getElementById("email").value;
-      const mensagem = document.getElementById("mensagem");
+    /*
+      COLOQUE A URL DO SEU CLOUDFLARE WORKER AQUI
+      quando terminarmos a configuração do Discord.
 
-      if (!email) {
-        mensagem.textContent = "Digite seu e-mail.";
+      Exemplo:
+      const WORKER_URL = "https://seu-worker.seudominio.workers.dev";
+    */
+    const WORKER_URL = "";
+
+    async function enviarEmail() {
+      const emailInput = document.getElementById("email");
+      const mensagem = document.getElementById("mensagem");
+      const botao = document.getElementById("continuarBtn");
+      const download = document.getElementById("download");
+
+      const email = emailInput.value.trim();
+
+      if (!email || !emailInput.checkValidity()) {
+        mensagem.textContent = "❌ Digite um e-mail válido.";
+        mensagem.style.color = "#ff5555";
         return;
       }
 
-      mensagem.textContent = "Processando...";
+      botao.disabled = true;
+      botao.textContent = "PROCESSANDO...";
+      mensagem.textContent = "Enviando...";
+      mensagem.style.color = "#ffd166";
+
+      /*
+        Enquanto o Worker não estiver configurado,
+        o download é liberado localmente.
+
+        Depois que colocarmos a URL do Worker,
+        o download só será liberado se o envio ao
+        Discord for confirmado.
+      */
+      if (!WORKER_URL) {
+        setTimeout(() => {
+          mensagem.textContent = "✅ Download liberado!";
+          mensagem.style.color = "#35c759";
+
+          download.style.display = "block";
+
+          botao.style.display = "none";
+        }, 800);
+
+        return;
+      }
+
+      try {
+        const resposta = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: email
+          })
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok || !resultado.ok) {
+          throw new Error("Falha ao enviar");
+        }
+
+        mensagem.textContent = "✅ Download liberado!";
+        mensagem.style.color = "#35c759";
+
+        download.style.display = "block";
+        botao.style.display = "none";
+
+      } catch (erro) {
+        console.error(erro);
+
+        mensagem.textContent =
+          "❌ Não foi possível liberar o download. Tente novamente.";
+
+        mensagem.style.color = "#ff5555";
+
+        botao.disabled = false;
+        botao.textContent = "CONTINUAR";
+      }
     }
   </script>
 
