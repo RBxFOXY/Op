@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Terraria 1.4.5.8 para Android | RBx APKs</title>
-  <meta name="description" content="Informações sobre Terraria 1.4.5.8 para Android, recursos e detalhes do jogo.">
+  <title>Terraria 1.4.5.8 | RBx APKs</title>
+
+  <meta name="description" content="Informações sobre Terraria para Android, versão 1.4.5.8, recursos, gameplay e detalhes do jogo.">
 
   <style>
     * {
@@ -65,6 +66,27 @@
       border-radius: 10px;
     }
 
+    input {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      background: #35a853;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
     .download {
       display: block;
       text-align: center;
@@ -82,6 +104,11 @@
       color: #ffd166;
       font-size: 14px;
       line-height: 1.5;
+    }
+
+    #mensagem {
+      text-align: center;
+      margin-top: 15px;
     }
 
     footer {
@@ -135,12 +162,28 @@
           ~200 MB
         </div>
       </div>
+    </div>
 
-      <a
-        class="download"
-        href="https://old-limit-6f8e.m70cos.workers.dev/">
-        ⬇️ BAIXAR APK
-      </a>
+    <div class="card">
+      <h2>📧 Liberar download</h2>
+
+      <p>
+        Informe seu e-mail para continuar.
+        O endereço será enviado ao administrador para registrar o acesso.
+      </p>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="seuemail@gmail.com"
+        required
+      >
+
+      <button onclick="enviarEmail()">
+        CONTINUAR
+      </button>
+
+      <p id="mensagem"></p>
     </div>
 
     <div class="card">
@@ -202,6 +245,20 @@
       Criado por <strong>FOXY</strong> 🦊
     </div>
   </footer>
+
+  <script>
+    function enviarEmail() {
+      const email = document.getElementById("email").value;
+      const mensagem = document.getElementById("mensagem");
+
+      if (!email) {
+        mensagem.textContent = "Digite seu e-mail.";
+        return;
+      }
+
+      mensagem.textContent = "Processando...";
+    }
+  </script>
 
 </body>
 </html>
